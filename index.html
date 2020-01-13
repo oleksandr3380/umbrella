@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Used if adding to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Node-RED UI Builder">
+
+    <!-- Used if adding to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Node-RED UI Builder">
+
+    <title>Node-RED UI Builder</title>
+    <meta name="description" content="Node-RED UI Builder">
+
+    <link rel="icon" href="images/node-blue.ico">
+
+    <link rel="stylesheet" href="picnic.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- The "app" element is where the code for dynamic updates is attached -->
+    <div class="wrapper">
+        <div class="box header">
+            <h2>Welcome to UIbuilder for Node-RED</h2>
+            <p>This is the default web page. If you open the developer console, you will see some debug output.
+                You can also see some dynamic data updating below, thanks to Umbrella.js.
+                Please see the README for the
+                <a href="https://github.com/TotallyInformation/node-red-contrib-uibuilder">node-red-contrib-uibuilder</a>
+                node for details on how to use UIbuilder.
+            </p>
+        </div>
+        <div class="box sidebar">
+            <p><b>Dynamic Data (via Umbrella.js)</b></p>
+            <p><table><tr><td>Messages Received:</td><td><span id="msgsReceived"></span></td></tr></table></p>
+            <p>Control Messages Received: <span id="msgsControl"></span></p>
+            <p>Messages Sent: <span id="msgsSent"></span></p>
+        </div>
+        <div class="box content" id="app">
+            <p>UIBuilder Front-End Version: <span id="feVersion"></span></p>
+            <p>Websocket State: <span id="socketConnectedState" class="label"></span></p>
+            <p>Last Message Received: <code id="showMsg"></code></p>
+            <p>Last Control Message Received: <code id="showCtrlMsg"></code></p>
+        </div>
+        <div class="box footer">
+            <p>Send :
+            <select id="sandwich" style="width:20%">
+                <option>Cheese</option>
+                <option>Ham</option>
+                <option>Tomato</option>
+            </select>
+            <button id="button1">Click Me</button>
+            <button id="button2" class='success'>Success</button>
+            <button id="button3" class='warning'>Warning</button>
+            <button id="button4" class='error'>Error</button>
+            <button id="button5" disabled>Disabled</button>
+            <label>
+                <input id="toggle1" type="checkbox">
+                <span class="toggle button">Toggle</span>
+            </label>
+            </p>
+            <p>Sent : <code id="showMsgSent"></code></p>
+        </div>
+    </div>
+
+    <!-- These MUST be in the right order. Note no leading / -->
+    <!-- REQUIRED: Socket.IO is loaded only once for all instances
+                   Without this, you don't get a websocket connection -->
+    <script src="/uibuilder/socket.io/socket.io.js"></script>
+    <!-- Note no leading / -->
+    <!-- OPTIONAL: Using Umbrella.js for this demo -->
+    <script src="umbrella.min.js"></script>
+    <!-- REQUIRED: Sets up Socket listeners and the msg object -->
+    <script src="uibuilderfe.min.js"></script>
+    <!-- OPTIONAL: You probably want this. Put your custom code here -->
+    <script src="index.js"></script>
+</body>
+</html>
